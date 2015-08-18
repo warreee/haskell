@@ -112,4 +112,14 @@ randomList n
          xs <- randomList (n-1)
          return (x:xs)
     | otherwise
-    = return []                            
+    = return []     
+    
+----------------------------------- Optional: Writer & MayFail Monads --------------------
+
+data Log e a = Error' e | Result' a String deriving (Show, Eq)
+
+instance Functor (Log e) where
+    fmap _ (Error' e) = Error' e     
+    fmap f (Result' a log) = Result' (f a) log
+    
+                          
